@@ -1,6 +1,7 @@
 package br.com.b2w.starwarsplanetsapi.entities;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -11,6 +12,9 @@ public class Planeta {
 	private String nome;
 	private String clima;
 	private String terreno;
+	
+	@Transient
+	private int filmes;
 	
 	public String getId() {
 		return id;
@@ -42,6 +46,14 @@ public class Planeta {
 
 	public void setTerreno(String terreno) {
 		this.terreno = terreno;
+	}
+
+	public int getFilmes() {
+		return filmes;
+	}
+
+	public void setFilmes(int filmes) {
+		this.filmes = filmes;
 	}
 	
 }
