@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import br.com.b2w.starwarsplanetsapi.service.exception.ErroAoConsultarAPISWException;
 import br.com.b2w.starwarsplanetsapi.service.exception.PlanetaJaInseridoException;
 import br.com.b2w.starwarsplanetsapi.service.exception.PlanetaNaoEncontradoException;
 
@@ -36,6 +37,15 @@ public class PlanetaExceptionHandler extends ResponseEntityExceptionHandler{
 		return handleExceptionInternal(ex, 
 				messageSource.getMessage("planeta.ja-cadastrado", null, LocaleContextHolder.getLocale()),
 				new HttpHeaders(), HttpStatus.CONFLICT, request);
+	}
+	
+	@ExceptionHandler({ErroAoConsultarAPISWException.class})
+	public ResponseEntity<Object> handleErroAoConsultarAPISWException(ErroAoConsultarAPISWException ex,
+			WebRequest request) {
+		
+		return handleExceptionInternal(ex, 
+				messageSource.getMessage("swapi.erro", null, LocaleContextHolder.getLocale()),
+				new HttpHeaders(), HttpStatus.NOT_FOUND, request);
 	}
 
 }
